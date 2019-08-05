@@ -45,7 +45,12 @@ namespace log4net.Tests
 		public static object InvokeMethod(object target, string name, params object[] args)
 		{
 #if NETSTANDARD1_3
-			return target.GetType().GetTypeInfo().GetDeclaredMethod(name).Invoke(target, args);
+			var method = target.GetType().GetTypeInfo().GetDeclaredMethod(name);
+			if (method == null)
+			{
+				method = target.GetType().BaseType.GetMethod(name);
+			}
+			return method.Invoke(target, args);
 #else
 			var method = target.GetType().GetMethod(name,
 				BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance, null,
@@ -57,15 +62,6 @@ namespace log4net.Tests
 					GetTypesArray(args), null);
 			}
 			return method.Invoke(target, args);
-#endif
-		}
-
-		public static object InvokeMethod(Type target, string name, params object[] args)
-		{
-#if NETSTANDARD1_3
-			return target.GetTypeInfo().GetDeclaredMethod(name).Invoke(null, args);
-#else
-			return target.GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static, null, GetTypesArray(args), null).Invoke(null, args);
 #endif
 		}
 

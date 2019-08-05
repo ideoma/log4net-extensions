@@ -9,7 +9,7 @@ namespace log4net.Petabyte.Extensions
     {
         private string _mmfilename;
         private MemoryFile _mmfile;
-        private MemoryMappedStream _stream;
+        internal MemoryMappedStream Stream { get; private set; }
 
         public override void OpenFile(string filename, bool append, Encoding encoding)
         {
@@ -22,10 +22,10 @@ namespace log4net.Petabyte.Extensions
                 }
             
                 _mmfile = new MemoryFile(_mmfilename);
-                _stream = new MemoryMappedStream(_mmfile, Appender.MapBufferSize);
+                Stream = new MemoryMappedStream(_mmfile, Appender.MapBufferSize);
                 if (append)
                 {
-                    FastForwardToEnd(_stream);
+                    FastForwardToEnd(Stream);
                 }
             }
             catch (Exception ex)
@@ -41,11 +41,11 @@ namespace log4net.Petabyte.Extensions
 
         public override void CloseFile()
         {
-            if (_stream != null)
+            if (Stream != null)
             {
-                var streamPosition = _stream.Position;
-                _stream.Dispose();
-                _stream = null;
+                var streamPosition = Stream.Position;
+                Stream.Dispose();
+                Stream = null;
                 
                 if (_mmfile != null)
                 {
@@ -66,7 +66,7 @@ namespace log4net.Petabyte.Extensions
 
         public override Stream AcquireLock()
         {
-            return _stream;
+            return Stream;
         }
 
         public override void ReleaseLock()

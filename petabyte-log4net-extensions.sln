@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petabyte.log4net.Extensions", "Petabyte.log4net.Extensions\Petabyte.log4net.Extensions.csproj", "{9B84016C-276B-4237-B049-15F8E737711B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petabytle.log4net.Extensions.Benchmarks", "Petabytle.log4net.Extensions.Benchmarks\Petabytle.log4net.Extensions.Benchmarks.csproj", "{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petabyte.log4net.Extensions.Benchmarks", "Petabyte.log4net.Extensions.Benchmarks\Petabyte.log4net.Extensions.Benchmarks.csproj", "{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petabyte.log4net.Extensions.Test", "Petabyte.log4net.Extensions.Test\Petabyte.log4net.Extensions.Test.csproj", "{E48D5EA3-BD8D-4931-8EED-FDA20207BBF4}"
 EndProject
@@ -29,12 +29,12 @@ Global
 		{9B84016C-276B-4237-B049-15F8E737711B}.NetRelease|Any CPU.Build.0 = NetRelease|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreDebug|Any CPU.ActiveCfg = CoreDebug|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreDebug|Any CPU.Build.0 = CoreDebug|Any CPU
-		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreRelease|Any CPU.ActiveCfg = CoreRelease|Any CPU
-		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreRelease|Any CPU.Build.0 = CoreRelease|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.NetDebug|Any CPU.ActiveCfg = NetDebug|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.NetDebug|Any CPU.Build.0 = NetDebug|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.NetRelease|Any CPU.ActiveCfg = NetRelease|Any CPU
 		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.NetRelease|Any CPU.Build.0 = NetRelease|Any CPU
+		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreRelease|Any CPU.ActiveCfg = CoreRelease|Any CPU
+		{18FFA726-B407-4A1A-97B3-D0C2B26F7E9A}.CoreRelease|Any CPU.Build.0 = CoreRelease|Any CPU
 		{E48D5EA3-BD8D-4931-8EED-FDA20207BBF4}.CoreDebug|Any CPU.ActiveCfg = CoreDebug|Any CPU
 		{E48D5EA3-BD8D-4931-8EED-FDA20207BBF4}.CoreDebug|Any CPU.Build.0 = CoreDebug|Any CPU
 		{E48D5EA3-BD8D-4931-8EED-FDA20207BBF4}.CoreRelease|Any CPU.ActiveCfg = CoreRelease|Any CPU

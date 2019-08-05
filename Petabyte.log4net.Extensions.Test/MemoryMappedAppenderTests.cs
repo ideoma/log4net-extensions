@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using log4net;
@@ -15,37 +14,132 @@ namespace Petabyte.log4net.Extensions.Test
     [TestFixture]
     public class MemoryMappedAppenderTests
     {
+        private const string TestLogFileName = "MemoryMappedAppenderTests.log";
+        
         [SetUp]
         public void Setup()
         {
             TestUtils.SetUp();
+            TestUtils.DeleteTestFiles(TestLogFileName);
         }
 
         [Test]
-        public void TestLogOutput()
+        public void ShouldAppendToAbortedFile()
         {
-            var filename = "test.log";
-            StartLogProcess(new ProcessOptions
+            TestUtils.StartLogProcess(new ProcessOptions
             {
-                File = filename,
+                File = TestLogFileName,
                 Text = "This is a message",
-                Abort = true
+                Abort = true,
+                MaxSizeRollBackups = 10
             });
-            StartLogProcess(new ProcessOptions
+            TestUtils.StartLogProcess(new ProcessOptions
             {
-                File = filename,
-                Text = "This is a message",
-                Abort = true
+                File = TestLogFileName,
+                Text = "This is a message 2",
+                Abort = false,
+                MaxSizeRollBackups = 10
             });
 
-            AssertFileEquals(filename, "This is a message" + Environment.NewLine + "This is a message 2" + Environment.NewLine);
+            AssertFileEquals(TestLogFileName, "This is a message" + Environment.NewLine + "This is a message 2" + Environment.NewLine);
         }
-
-        private void StartLogProcess(ProcessOptions options)
+        
+        [Test]
+        public void ShouldAppendToNonAbortedFile()
         {
-            Process.Start("..\\..\\..\\..\\Petabytle.log4net.Extensions.Benchmarks\\bin\\");
-        }
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message",
+                Abort = false,
+                MaxSizeRollBackups = 10
+            });
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message 2",
+                Abort = false,
+                MaxSizeRollBackups = 10
+            });
 
+            AssertFileEquals(TestLogFileName, "This is a message" + Environment.NewLine + "This is a message 2" + Environment.NewLine);
+        }
+        
+        [Test]
+        public void ShouldCreateNewFileIfAbortedAtTheEndOfFullFileLen()
+        {
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message",
+                Abort = false,
+                MaxSizeRollBackups = 10,
+                MappingBufferSize = "100",
+                MaximumFileSize = "100",
+                WriteBytes = "100"
+            });
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message 2",
+                Abort = false,
+                MaxSizeRollBackups = 10,
+                MappingBufferSize = "100",
+                MaximumFileSize = "100",
+            });
+
+            AssertFileEquals(TestLogFileName, "This is a message 2" + Environment.NewLine);
+        }
+        
+        [Test]
+        public void ShouldWriteThroughMultipleBuffers()
+        {
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message",
+                Abort = false,
+                MaxSizeRollBackups = 10,
+                MappingBufferSize = "100",
+                MaximumFileSize = "100",
+                WriteBytes = "10kb"
+            });
+
+            var expected = TestUtils.BuildRepeatString("This is a message", 10 * 1024);
+
+            AssertFileEquals(TestLogFileName, expected + Environment.NewLine);
+        }
+        
+        [Test]
+        public void ShouldLogFinalException()
+        {
+            TestUtils.StartLogProcess(new ProcessOptions
+            {
+                File = TestLogFileName,
+                Text = "This is a message",
+                Abort = false,
+                MaxSizeRollBackups = 10,
+                MappingBufferSize = "100kb",
+                Throw = true
+            });
+
+            var expected = Environment.NewLine +
+                           "System.NullReferenceException: Object reference not set to an instance of an object." +
+                           Environment.NewLine + "   at Petabyte.log4net.Extensions.DummyLogger.Program";
+            AssertFileEquals(TestLogFileName, expected, expected.Length);
+        }
+        
+        [Test]
+        public void ShouldAppendManyLines()
+        {
+            var logger = CreateLogger(TestLogFileName, new SilentErrorHandler(), "2MB", 2 * 1024 * 1024);
+            for (int i = 0; i < 100000; i++)
+            {
+                logger.Log(typeof(MemoryMappedAppenderTests), Level.Info, "Test Message quick logger", null);
+            }
+            DestroyLogger();
+        }
+        
         private static void DestroyLogger()
         {
             var h = (Hierarchy)LogManager.GetRepository("TestRepository");
@@ -54,7 +148,7 @@ namespace Petabyte.log4net.Extensions.Test
             LoggerManager.RepositorySelector = new DefaultRepositorySelector(typeof(Hierarchy));
         }
         
-        private static void AssertFileEquals(string filename, string contents)
+        private static void AssertFileEquals(string filename, string contents, int len = -1)
         {
 #if NETSTANDARD1_3
 			StreamReader sr = new StreamReader(File.Open(filename, FileMode.Open));
@@ -63,7 +157,11 @@ namespace Petabyte.log4net.Extensions.Test
 #endif
             string logcont = sr.ReadToEnd();
             sr.Close();
-
+            if (len >= 0)
+            {
+                logcont = logcont.Substring(0, len);
+            }
+            
             Assert.AreEqual(contents, logcont, "Log contents is not what is expected");
 
             File.Delete(filename);
