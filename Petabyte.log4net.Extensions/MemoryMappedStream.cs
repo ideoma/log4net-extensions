@@ -18,7 +18,7 @@ namespace log4net.Petabyte.Extensions
 
         public override void Flush()
         {
-            _currentView?.Flush();
+            // _currentView?.Flush();
         }
 
         public override int Read(byte[] buffer, int offset, int count)

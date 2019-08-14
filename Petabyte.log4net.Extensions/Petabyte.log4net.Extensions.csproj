@@ -32,4 +32,11 @@
         <PackageReference Include="log4net" Version="2.0.8" />
     </ItemGroup>
 
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <ItemGroup>
+            <DllFiles Include="$(TargetDir)/*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(SolutionDir)/Petabyte.log4net.Extensions/bin/Release/netstandard2.0" />
+    </Target>
+
 </Project>

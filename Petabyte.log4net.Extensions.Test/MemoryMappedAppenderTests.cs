@@ -133,9 +133,9 @@ namespace Petabyte.log4net.Extensions.Test
         public void ShouldAppendManyLines()
         {
             var logger = CreateLogger(TestLogFileName, new SilentErrorHandler(), "2MB", 2 * 1024 * 1024);
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 1000000; i++)
             {
-                logger.Log(typeof(MemoryMappedAppenderTests), Level.Info, "Test Message quick logger", null);
+                logger.Log(typeof(MemoryMappedAppenderTests), Level.Info, "How to Do Logging in C# With Log4net?", null);
             }
             DestroyLogger();
         }
