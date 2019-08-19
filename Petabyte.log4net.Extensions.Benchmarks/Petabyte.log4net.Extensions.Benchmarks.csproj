@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Configurations>NetRelease;CoreDebug;CoreRelease;NetDebug</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <AssemblyName>Petabyte.log4net.Extensions.Benchmarks</AssemblyName>
+        <RootNamespace>Petabyte.log4net.Extensions.Benchmarks</RootNamespace>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'CoreRelease' ">
+        <DefineConstants>NETSTANDARD1_3</DefineConstants>
+        <Optimize>true</Optimize>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+      <PackageReference Include="log4net" Version="2.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Petabyte.log4net.Extensions\Petabyte.log4net.Extensions.csproj" />
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <ItemGroup>
+            <DllFiles Include="$(TargetDir)/*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(DllFiles)" DestinationFolder="$(SolutionDir)/Petabyte.log4net.Extensions.Benchmarks/bin/Release/netstandard2.0" />
+    </Target>
+    
+</Project>

@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Configurations>NetRelease;CoreDebug;CoreRelease;NetDebug</Configurations>
+    <Platforms>AnyCPU</Platforms>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">
+    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+    <TargetFrameworks>net472</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'NetDebug' ">
+    <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+    <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <TargetFrameworks>net472</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'CoreDebug' ">
+    <DefineConstants>DEBUG;TRACE;NETSTANDARD1_3</DefineConstants>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'CoreRelease' ">
+    <DefineConstants>TRACE;NETSTANDARD1_3</DefineConstants>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.5.0" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Petabyte.log4net.Extensions\Petabyte.log4net.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Petabyte.log4net.Extensions.Test\ProcessOptions.cs" Link="ProcessOptions.cs" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <LoggerFiles Include="$(TargetDir)/*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(LoggerFiles)" DestinationFolder="$(SolutionDir)/Petabyte.log4net.Extensions.Test/$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
