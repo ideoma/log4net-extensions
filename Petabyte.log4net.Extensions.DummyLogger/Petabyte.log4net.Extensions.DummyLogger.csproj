@@ -20,12 +20,12 @@
 
   <PropertyGroup Condition=" '$(Configuration)' == 'CoreDebug' ">
     <DefineConstants>DEBUG;TRACE;NETSTANDARD1_3</DefineConstants>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'CoreRelease' ">
     <DefineConstants>TRACE;NETSTANDARD1_3</DefineConstants>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <Optimize>true</Optimize>
   </PropertyGroup>
 

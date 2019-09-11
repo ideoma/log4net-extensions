@@ -18,6 +18,11 @@ namespace log4net.Petabyte.Extensions
                 _mmfilename = filename;
                 if (!append && File.Exists(filename))
                 {
+                    // Try to lock file exclusivly before deleting
+                    using (File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
+                    {
+                    }
+                    
                     File.Delete(filename);
                 }
             

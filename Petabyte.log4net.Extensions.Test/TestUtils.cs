@@ -68,7 +68,7 @@ namespace Petabyte.log4net.Extensions.Test
             if (isCore)
             {
                 executable = "dotnet";
-                args = "Petabyte.log4net.Extensions.DummyLogger.dll " + args;
+                args = Path.Combine(TestContext.CurrentContext.TestDirectory, "Petabyte.log4net.Extensions.DummyLogger.dll") + " " + args;
             }
 
             var process = Process.Start(executable, args);

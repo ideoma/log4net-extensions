@@ -44,14 +44,14 @@ namespace log4net.Tests
 
 		public static object InvokeMethod(object target, string name, params object[] args)
 		{
-#if NETSTANDARD1_3
-			var method = target.GetType().GetTypeInfo().GetDeclaredMethod(name);
-			if (method == null)
-			{
-				method = target.GetType().BaseType.GetMethod(name);
-			}
-			return method.Invoke(target, args);
-#else
+//#if NETSTANDARD1_3
+//			var method = target.GetType().GetTypeInfo().GetDeclaredMethod(name);
+//			if (method == null)
+//			{
+//				method = target.GetType().BaseType.GetMethod(name);
+//			}
+//			return method.Invoke(target, args);
+//#else
 			var method = target.GetType().GetMethod(name,
 				BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance, null,
 				GetTypesArray(args), null);
@@ -62,7 +62,7 @@ namespace log4net.Tests
 					GetTypesArray(args), null);
 			}
 			return method.Invoke(target, args);
-#endif
+//#endif
 		}
 
 		public static object GetField(object target, string name)

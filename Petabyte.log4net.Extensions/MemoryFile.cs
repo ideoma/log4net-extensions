@@ -20,7 +20,7 @@ namespace log4net.Petabyte.Extensions
         {
             try
             {
-                _fileOpened = File.Open(_fullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                _fileOpened = File.Open(_fullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             }
             catch (IOException)
             {

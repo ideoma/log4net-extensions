@@ -1503,11 +1503,11 @@ namespace log4net.Tests.Appender
 
 		private static void AssertFileEquals(string filename, string contents)
 		{
-#if NETSTANDARD1_3
-			StreamReader sr = new StreamReader(File.Open(filename, FileMode.Open));
-#else
+//#if NETSTANDARD1_3
+//			StreamReader sr = new StreamReader(File.Open(filename, FileMode.Open));
+//#else
 			StreamReader sr = new StreamReader(filename);
-#endif
+//#endif
 			string logcont = sr.ReadToEnd();
 			sr.Close();
 
@@ -1543,6 +1543,7 @@ namespace log4net.Tests.Appender
 
 			FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
 			fs.Write(Encoding.ASCII.GetBytes("Test"), 0, 4);
+			fs.Flush();
 
 			SilentErrorHandler sh = new SilentErrorHandler();
 			ILogger log = CreateLogger(filename, new FileAppender.ExclusiveLock(), sh);
