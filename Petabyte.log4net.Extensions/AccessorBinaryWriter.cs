@@ -31,15 +31,6 @@ namespace log4net.Petabyte.Extensions
             unsafe
             {
                 view.SafeMemoryMappedViewHandle.AcquirePointer(ref _memoryPtr);
-//                if (view.PointerOffset % BufferSize != 0)
-//                {
-//                    _memoryPtr += _bufferOffset % ALLOCATION_GRANULARITY;
-//                }
-//                else
-//                {
-//                    _memoryPtr += _bufferOffset % ALLOCATION_GRANULARITY;
-//                }
-
                 _memoryPtr += view.PointerOffset;
             }
         }

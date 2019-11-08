@@ -1,0 +1,6 @@
+Petabyte.log4net.Extensions.Benchmarks/bin
+Petabyte.log4net.Extensions.Benchmarks/obj
+Petabyte.log4net.Extensions.DummyLogger/bin
+Petabyte.log4net.Extensions.DummyLogger/obj
+*.log*
+*.user
