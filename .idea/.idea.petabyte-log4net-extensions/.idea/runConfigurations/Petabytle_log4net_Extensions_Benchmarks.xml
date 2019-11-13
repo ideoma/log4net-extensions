@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Petabytle.log4net.Extensions.Benchmarks" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/Petabyte.log4net.Extensions.Benchmarks/bin/Release/netstandard2.0/Petabyte.log4net.Extensions.Benchmarks.dll" />
+    <option name="PROGRAM_PARAMETERS" value="-f * --keepFiles --runtimes clr core" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Petabyte.log4net.Extensions.Benchmarks" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <option name="USE_MONO" value="0" />
+    <option name="RUNTIME_ARGUMENTS" value="benchmark " />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Petabyte.log4net.Extensions.DummyLogger/Petabyte.log4net.Extensions.DummyLogger.csproj" />
+    <option name="PROJECT_EXE_PATH_TRACKING" value="0" />
+    <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+    <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
+    <option name="PROJECT_KIND" value="DotNetCore" />
+    <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
+    <method v="2">
+      <option name="Build" enabled="true" />
+    </method>
+  </configuration>
+</component>
