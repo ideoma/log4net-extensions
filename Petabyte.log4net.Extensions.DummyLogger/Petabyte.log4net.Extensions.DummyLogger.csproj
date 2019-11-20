@@ -4,6 +4,7 @@
     <Configurations>NetRelease;CoreDebug;CoreRelease;NetDebug</Configurations>
     <Platforms>AnyCPU</Platforms>
     <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">

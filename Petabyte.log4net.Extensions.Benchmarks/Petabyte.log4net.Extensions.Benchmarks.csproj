@@ -6,6 +6,7 @@
         <AssemblyName>Petabyte.log4net.Extensions.Benchmarks</AssemblyName>
         <RootNamespace>Petabyte.log4net.Extensions.Benchmarks</RootNamespace>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">

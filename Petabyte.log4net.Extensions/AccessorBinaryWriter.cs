@@ -10,8 +10,6 @@ namespace log4net.Petabyte.Extensions
         private readonly MemoryMappedViewAccessor _view;
         private unsafe byte* _memoryPtr;
 
-        private static readonly int ALLOCATION_GRANULARITY = AccessorHelper.DwAllocationGranularity;
-        
         public  AccessorBinaryWriter(MemoryMappedViewAccessor view, long bufferOffset,
             long bufferSize)
         {

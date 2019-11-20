@@ -2,8 +2,6 @@ namespace log4net.Petabyte.Extensions
 {
     public unsafe class AccessorHelper
     {
-        public const int DwAllocationGranularity = 64 * 1024;
-        
         internal static void Memcpy(byte* dest, byte* src, int len)
         {
             // AMD64 implementation uses longs instead of ints where possible 

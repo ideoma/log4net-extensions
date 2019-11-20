@@ -1,11 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+    
     <PropertyGroup>
         <Configurations>NetRelease;CoreDebug;CoreRelease;NetDebug</Configurations>
         <Platforms>AnyCPU</Platforms>
         <AssemblyName>log4net.Petabyte.Extensions</AssemblyName>
         <RootNamespace>log4net.Petabyte.Extensions</RootNamespace>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>log4net.Petabyte.Extensions</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Alex Pelagenko</Authors>
+        <Company>Petabyte Ltd</Company>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">
