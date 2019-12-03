@@ -11,6 +11,8 @@
         <Authors>Alex Pelagenko</Authors>
         <Company>Petabyte Ltd</Company>
         <IsPackable>true</IsPackable>
+        <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/ideoma/log4net-extensions</PackageProjectUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'NetRelease' ">
